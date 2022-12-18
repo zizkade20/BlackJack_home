@@ -57,6 +57,12 @@ namespace BlackJack
             
             DealerCards.Add(DeckOfCards[indexd1]);
 
+            Hrac Hrac1 = new Hrac();
+
+            Console.WriteLine("Zadej sazku:");
+            int sazka = Int32.Parse(Console.ReadLine());
+            Hrac1.Penize -= sazka;
+
             int summH = 0;
             int summD = 0;
             bool hit = true;
@@ -67,11 +73,14 @@ namespace BlackJack
                 {
                     hit = false;
                     Console.WriteLine("Prohrál jsi, máš přes 21");
+                    
                 }
                 if (summD > 21){
                     hit = false;
                     Console.WriteLine("Vyhral Jsi, dealer má přes 21");
+                    Hrac1.Penize += sazka;
                 }
+                
                 foreach (var j in PlayerCards)
                 {
                     switch (j)
@@ -124,8 +133,6 @@ namespace BlackJack
                     }
                 }
 
-                
-                
                 foreach (var k in DealerCards)
                 {
                     switch (k)
@@ -135,8 +142,7 @@ namespace BlackJack
                             {
                                 summD =+ 1;
                             }
-                            else
-                            {
+                            else {
                                 summD =+ 11;
                             }
                             break;
@@ -178,7 +184,9 @@ namespace BlackJack
                             break;
                     }
                 }
+                
 
+                Console.WriteLine("Zůstatek: " + Hrac1.Penize + "$\n");
                 
 
                 Console.Write("Vase Karty: ");
@@ -199,15 +207,19 @@ namespace BlackJack
                 Console.WriteLine("\nSoučet vašich karet je: " + summH);
                 Console.WriteLine("Součet dealerových karet je: " + summD);
 
+                
+
                 Console.WriteLine("\nChcete líznout další kartu? (Y/N)");
                 string volba = Console.ReadLine().ToLower();
                 switch (volba)
                 {
                     case "y":
                         PlayerCards.Add(DeckOfCards[indexh2++]);
-
-
-
+                        if (summH > 21)
+                        {
+                            hit = false;
+                            Console.WriteLine("Máš přes 21, prohál jsi! :(");
+                        }
 
                         break;
                     case "n":
@@ -216,6 +228,7 @@ namespace BlackJack
                         if (summH == 21)
                         {
                             Console.WriteLine("Máš blackjack gratuluji! :)");
+                            Hrac1.Penize += 2*sazka;
                         }
                         
                         else
@@ -243,6 +256,7 @@ namespace BlackJack
                                 if (summD > 21)
                                 {
                                     Console.WriteLine("Dealer má přes 21, vyhrál jsi! :) ");
+                                    Hrac1.Penize += 2*sazka;
                                 }
                                 else if (summD > summH && summD! > 21)
                                 {
