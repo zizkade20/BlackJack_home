@@ -45,6 +45,7 @@ namespace BlackJack
                     case "o":
                         break;
                     case "e":
+                        Game = false;
                         break;
                 }
 

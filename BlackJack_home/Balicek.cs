@@ -23,7 +23,7 @@ namespace BlackJack
             };
             List<string> hodnoty = new List<string>()
             {
-                "2", "3","4","5","6","7","8","9","10","J","Q","K","A",
+                "2","3","4","5","6","7","8","9","10","J","Q","K","A",
             };
             foreach (string symbol in symboly)
             {
@@ -44,7 +44,7 @@ namespace BlackJack
             {
                 DeckOfCards.Add(i.VratNazevKarty());
             }
-
+            
 
             int indexh1 = random.Next(DeckOfCards.Count);
             int indexh2 = random.Next(DeckOfCards.Count);
@@ -57,13 +57,11 @@ namespace BlackJack
             
             DealerCards.Add(DeckOfCards[indexd1]);
 
-
+            int summH = 0;
+            int summD = 0;
             bool hit = true;
             while (hit)
             {
-
-                int summH = 0;
-                int summD = 0;
 
                 if (summH > 21)
                 {
@@ -82,8 +80,7 @@ namespace BlackJack
                             if (summH > 11)
                             {
                                 summH =+ 1;
-                            }
-                            else
+                            } else
                             {
                                 summH =+ 11;
                             }
@@ -136,48 +133,48 @@ namespace BlackJack
                         case "A♣" or "A♥" or "A♦" or "A♠":
                             if (summD > 11)
                             {
-                                summD = +1;
+                                summD =+ 1;
                             }
                             else
                             {
-                                summD = +11;
+                                summD =+ 11;
                             }
                             break;
                         case "2♣" or "2♥" or "2♦" or "2♠":
                             summD =+ 2;
                             break;
                         case "3♣" or "3♥" or "3♦" or "3♠":
-                            summD = +3;
+                            summD =+3;
                             break;
                         case "4♣" or "4♥" or "4♦" or "4♠":
-                            summD = +4;
+                            summD =+ 4;
                             break;
                         case "5♣" or "5♥" or "5♦" or "5♠":
-                            summD = +5;
+                            summD =+ 5;
                             break;
                         case "6♣" or "6♥" or "6♦" or "6♠":
-                            summD = +6;
+                            summD =+ 6;
                             break;
                         case "7♣" or "7♥" or "7♦" or "7♠":
-                            summD = +7;
+                            summD =+ 7;
                             break;
                         case "8♣" or "8♥" or "8♦" or "8♠":
-                            summD = +8;
+                            summD =+ 8;
                             break;
                         case "9♣" or "9♥" or "9♦" or "9♠":
-                            summD = +9;
+                            summD =+ 9;
                             break;
                         case "10♣" or "10♥" or "10♦" or "10♠":
-                            summD = +10;
+                            summD =+ 10;
                             break;
                         case "J♣" or "J♥" or "J♦" or "J♠":
-                            summD = +11;
+                            summD =+ 11;
                             break;
                         case "Q♣" or "Q♥" or "Q♦" or "Q♠":
-                            summD = +11;
+                            summD =+ 11;
                             break;
                         case "K♣" or "K♥" or "K♦" or "K♠":
-                            summD = +11;
+                            summD =+ 11;
                             break;
                     }
                 }
@@ -266,16 +263,10 @@ namespace BlackJack
                 }
             }
 
-            /*
-            foreach (var i in Deck)
-            {
-                Console.WriteLine(i.VratNazevKarty());
-            }
-            */
+            
         }
 
     }
-
 
 
 }
