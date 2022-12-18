@@ -35,23 +35,7 @@ namespace BlackJack
                         Balicek Balicek1 = new Balicek();
                         //Balicek1.VratKartu();
                         Balicek1.CreateDeck();
-                        bool hit = true;
-                        while (hit)
-                        {
-                            
-                            Console.WriteLine("Chcete líznout další kartu? (Y/N)");
-                            string volba = Console.ReadLine().ToLower();
-                            switch (volba)
-                            {
-                                case "y":
-                                    break;
-                                case "n":
-                                    break;
-                                default:
-                                    Console.WriteLine("Vyber z nabídky!");
-                                    break;
-                            }
-                        }
+                        
                         break;
                     case "z":
                         break;
