@@ -35,28 +35,44 @@ namespace BlackJack
                 
             }
 
+
+
             var random = new Random();
             List<string> DeckOfCards = new List<string>();
-            List<string> PlayerCards = new List<string>();
-            List<string> DealerCards = new List<string>();
+            
 
             foreach (var i in Deck)
             {
                 DeckOfCards.Add(i.VratNazevKarty());
             }
+
+
+            List<string> PlayerCards = new List<string>();
+            List<string> DealerCards = new List<string>();
+            Random ran = new Random();
+
+            for (int i = 0; i < 2; i++)
+            {
+                int num = ran.Next(DeckOfCards.Count);
+
+                PlayerCards.Add(DeckOfCards[num]);
+                DeckOfCards.RemoveAt(num);
+
+            }
             
 
+            /*
             int indexh1 = random.Next(DeckOfCards.Count);
             int indexh2 = random.Next(DeckOfCards.Count);
 
             int indexd1 = random.Next(DeckOfCards.Count);
             int indexd2 = random.Next(DeckOfCards.Count);
-
+            
 
             PlayerCards.Add(DeckOfCards[indexh1]);
             
             DealerCards.Add(DeckOfCards[indexd1]);
-
+            */
             Hrac Hrac1 = new Hrac();
 
             Console.WriteLine("Zadej sazku:");
@@ -69,18 +85,6 @@ namespace BlackJack
             while (hit)
             {
 
-                if (summH > 21)
-                {
-                    hit = false;
-                    Console.WriteLine("Prohrál jsi, máš přes 21");
-                    
-                }
-                if (summD > 21){
-                    hit = false;
-                    Console.WriteLine("Vyhral Jsi, dealer má přes 21");
-                    Hrac1.Penize += sazka;
-                }
-                
                 foreach (var j in PlayerCards)
                 {
                     switch (j)
@@ -88,51 +92,66 @@ namespace BlackJack
                         case "A♣" or "A♥" or "A♦" or "A♠":
                             if (summH > 11)
                             {
-                                summH =+ 1;
-                            } else
+                                summH = +1;
+                            }
+                            else
                             {
-                                summH =+ 11;
+                                summH = +11;
                             }
                             break;
                         case "2♣" or "2♥" or "2♦" or "2♠":
-                            summH =+ 2;
+                            summH = +2;
                             break;
                         case "3♣" or "3♥" or "3♦" or "3♠":
-                            summH =+ 3;
+                            summH = +3;
                             break;
                         case "4♣" or "4♥" or "4♦" or "4♠":
-                            summH =+ 4;
+                            summH = +4;
                             break;
                         case "5♣" or "5♥" or "5♦" or "5♠":
-                            summH =+ 5;
+                            summH = +5;
                             break;
                         case "6♣" or "6♥" or "6♦" or "6♠":
-                            summH =+ 6;
+                            summH = +6;
                             break;
                         case "7♣" or "7♥" or "7♦" or "7♠":
-                            summH =+ 7;
+                            summH = +7;
                             break;
                         case "8♣" or "8♥" or "8♦" or "8♠":
-                            summH =+ 8;
+                            summH = +8;
                             break;
                         case "9♣" or "9♥" or "9♦" or "9♠":
-                            summH =+ 9;
+                            summH = +9;
                             break;
                         case "10♣" or "10♥" or "10♦" or "10♠":
-                            summH =+ 10;
+                            summH = +10;
                             break;
                         case "J♣" or "J♥" or "J♦" or "J♠":
-                            summH =+ 11;
+                            summH = +11;
                             break;
                         case "Q♣" or "Q♥" or "Q♦" or "Q♠":
-                            summH =+ 11;
+                            summH = +11;
                             break;
                         case "K♣" or "K♥" or "K♦" or "K♠":
-                            summH =+ 11;
+                            summH = +11;
                             break;
                     }
                 }
 
+                
+                if (summH > 21)
+                {
+                    hit = false;
+                    Console.WriteLine("Prohrál jsi, máš přes 21");
+
+                }
+                if (summD > 21) {
+                    hit = false;
+                    Console.WriteLine("Vyhral Jsi, dealer má přes 21");
+                    Hrac1.Penize += sazka;
+                }
+
+                
                 foreach (var k in DealerCards)
                 {
                     switch (k)
@@ -184,8 +203,8 @@ namespace BlackJack
                             break;
                     }
                 }
-                
-
+                                
+                // AHOJ
                 Console.WriteLine("Zůstatek: " + Hrac1.Penize + "$\n");
                 
 
@@ -214,7 +233,15 @@ namespace BlackJack
                 switch (volba)
                 {
                     case "y":
-                        PlayerCards.Add(DeckOfCards[indexh2++]);
+                        //PlayerCards.Add(DeckOfCards[indexh2]);
+                        for (int i = 0; i < 1; i++)
+                        {
+                            int num = ran.Next(DeckOfCards.Count);
+
+                            PlayerCards.Add(DeckOfCards[num]);
+                            DeckOfCards.RemoveAt(num);
+
+                        }
                         if (summH > 21)
                         {
                             hit = false;
@@ -235,7 +262,7 @@ namespace BlackJack
                         {
                             while (summD < summH && summH! > 21)
                             {
-                                DealerCards.Add(DeckOfCards[indexd2++]);
+                                //DealerCards.Add(DeckOfCards[indexd2++]);
 
                                 Console.Write("Vase Karty: ");
                                 foreach (var j in PlayerCards)
@@ -279,7 +306,65 @@ namespace BlackJack
 
             
         }
+       /* internal int CountCards(List<Karta> Karty)
+        {
+            int summH = 0;
 
+            foreach (var j in Karty)
+            {
+                switch (j.Hodnota)
+                {
+                    case "A":
+                        if (summH > 11)
+                        {
+                            summH = +1;
+                        }
+                        else
+                        {
+                            summH = +11;
+                        }
+                        break;
+                    case "2":
+                        summH = +2;
+                        break;
+                    case "3":
+                        summH = +3;
+                        break;
+                    case "4":
+                        summH = +4;
+                        break;
+                    case "5":
+                        summH = +5;
+                        break;
+                    case "6":
+                        summH = +6;
+                        break;
+                    case "7":
+                        summH = +7;
+                        break;
+                    case "8":
+                        summH = +8;
+                        break;
+                    case "9":
+                        summH = +9;
+                        break;
+                    case "10":
+                        summH = +10;
+                        break;
+                    case "J":
+                        summH = +11;
+                        break;
+                    case "Q":
+                        summH = +11;
+                        break;
+                    case "K":
+                        summH = +11;
+                        break;
+                }
+            }
+            return summH;
+        }*/
+  
     }
 
 
@@ -289,7 +374,7 @@ namespace BlackJack
 
 
 
-
+          
 
 
 
