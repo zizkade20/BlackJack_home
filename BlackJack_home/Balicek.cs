@@ -75,8 +75,7 @@ namespace BlackJack
             int sazka = Int32.Parse(Console.ReadLine());
             Hrac1.Penize -= sazka;
 
-            int summH = 0;
-            int summD = 0;
+            
             bool hit = true;
             while (hit)
             {
@@ -94,8 +93,9 @@ namespace BlackJack
                     Hrac1.Penize += sazka;
                 }
                 */
-                
 
+                int summH = 0;
+                int summD = 0;
                 foreach (var j in PlayerCards)
                 {
                     switch (j)
@@ -258,17 +258,17 @@ namespace BlackJack
 
                             else
                             {
-                                
-                                /*
-                                for (int i = 0; i < 1; i++)
+                                while (summD < 21)
                                 {
+                                    
                                     int num = ran.Next(DeckOfCards.Count);
 
                                     DealerCards.Add(DeckOfCards[num]);
                                     DeckOfCards.RemoveAt(num);
-
+                                    
                                 }
-                                */
+                                
+                                
                                 Console.Write("Vase Karty: ");
                                 foreach (var j in PlayerCards)
                                 {
