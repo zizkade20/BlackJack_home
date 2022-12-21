@@ -9,11 +9,11 @@ namespace BlackJack
 {
     internal class Balicek
     {
-        internal List<Karta> Deck;
+        internal List<Karta> Deck = new List<Karta>();
 
 
         // Funkce vytvoří balíček a naplní ho kartami
-        internal void CreateDeck()
+        internal static List<Karta> CreateDeck()
         {
             List<Karta> Deck = new List<Karta>();
 
@@ -34,183 +34,59 @@ namespace BlackJack
                 }
 
             }
+            return Deck;
 
+        }
+        internal static List<string> ShowDeck() { 
 
             var random = new Random();
             List<string> DeckOfCards = new List<string>();
 
 
-            foreach (var i in Deck)
+            foreach (var i in Balicek.CreateDeck())
             {
                 DeckOfCards.Add(i.VratNazevKarty());
             }
+            return DeckOfCards;
+        }
 
+        internal static List<string> Lizni(List<string> Karty, int Pocet) { 
 
-            List<string> PlayerCards = new List<string>();
-            List<string> DealerCards = new List<string>();
             Random ran = new Random();
-            
-            // naplnění hráčovy ruky kartami
-            for (int i = 0; i < 2; i++)
+            List<string> Ruka = new List<string>();
+            // naplnění ruky kartami
+            for (int i = 0; i < Pocet; i++)
             {
-                int num = ran.Next(DeckOfCards.Count);
+                int num = ran.Next(Karty.Count);
 
-                PlayerCards.Add(DeckOfCards[num]);
-                DeckOfCards.RemoveAt(num);
+                Ruka.Add(Balicek.ShowDeck()[num]);
+                Karty.RemoveAt(num);
 
             }
-            // naplnění krupierovy ruky kartami
-            for (int i = 0; i < 2; i++)
-            {
-                int num = ran.Next(DeckOfCards.Count);
-
-                DealerCards.Add(DeckOfCards[num]);
-                DeckOfCards.RemoveAt(num);
-
-            }
-
-
-            Hrac Hrac1 = new Hrac();            
-            bool hit = true;
+            return Ruka;
             // while běží dokud hráč líže
-            while (hit)
+        }/*
+        internal static List<string> LizniDealer(List<string> Karty, int Pocet)
+        {
+
+            
+            Random ran = new Random();
+
+            // naplnění hráčovy ruky kartami
+            
+            // naplnění krupierovy ruky kartami
+            for (int i = 0; i < Pocet; i++)
             {
-                        
-          
-                Balicek.KartyRuka(PlayerCards);
+                int num = ran.Next(Balicek.ShowCards().Count);
 
-                Console.WriteLine("\nSoučet vašich karet je: " + Balicek.CountCards(PlayerCards));
-
-                if (Balicek.CountCards(PlayerCards) < 21)
-                {
-
-                    Console.WriteLine("\n(H)it / (S)tand / (D)ouble");
-                    string volba = Console.ReadLine().ToLower();
-                    
-                    switch (volba)
-                    {
-                        // když hráč vybere hit, přičtě se mu jedna karta
-                        case "h":
-                            for (int i = 0; i < 1; i++)
-                            {
-
-                                int num = ran.Next(DeckOfCards.Count);
-
-                                PlayerCards.Add(DeckOfCards[num]);
-                                DeckOfCards.RemoveAt(num);
-
-                                if (Balicek.CountCards(PlayerCards) > 21)
-                                {
-                                    hit = false;
-
-                                    Balicek.KartyRuka(PlayerCards);
-                                    Console.WriteLine("\nSoučet vašich karet je: " + Balicek.CountCards(PlayerCards));
-
-                                    Console.WriteLine("Máš přes 21, prohál jsi! :(");
-                                    
-                                } 
-                                
-                            }
-
-                            break;
-                        // když hráč vybere stand, krupiér začne lízat karty dokud nemá více než hráč a nepřekročil 21
-                        case "s":
-
-                            hit = false;
-
-                            while (Balicek.CountCards(DealerCards) <= Balicek.CountCards(PlayerCards))
-                            {
-
-                                int num = ran.Next(DeckOfCards.Count);
-
-                                DealerCards.Add(DeckOfCards[num]);
-                                DeckOfCards.RemoveAt(num);
-
-                                
-                                
-
-                            } 
-                            // Podmínky pro určení vítěze
-                            if (Balicek.CountCards(PlayerCards) == 21)
-                            {
-                                hit = false;
-
-                                Balicek.KartyRuka(PlayerCards);
-                                Console.WriteLine("\nSoučet vašich karet je: " + Balicek.CountCards(PlayerCards));
-
-                                Console.WriteLine("Gratuluji máš Blackjack!");
-                                Hrac1.Win = false;
-                                Hrac1.Blackjack = true;
-                                Console.WriteLine(Hrac1.Score * 4);
-
-                            }
-
-                            else if (Balicek.CountCards(DealerCards) == Balicek.CountCards(PlayerCards))
-                            {
-
-                                int numm = ran.Next(DeckOfCards.Count);
-
-                                DealerCards.Add(DeckOfCards[numm]);
-                                DeckOfCards.RemoveAt(numm);
-                            }
-                            else if (Balicek.CountCards(PlayerCards) > Balicek.CountCards(DealerCards))
-                            {
-                                hit = false;
-
-                                Balicek.KartyRuka(PlayerCards);
-                                Console.WriteLine("\nSoučet vašich karet je: " + Balicek.CountCards(PlayerCards));
-
-                                Console.WriteLine("Máš více než krupier, vyhrál jsi :)!");
-                                Hrac1.Win = true;
-
-                                Console.WriteLine(Hrac1.Score * 2);
-                            }
-
-                            Balicek.KartyRuka(PlayerCards);
-                            Balicek.KartyRuka(DealerCards);
-
-                            Console.WriteLine("\nSoučet vašich karet je: " + Balicek.CountCards(PlayerCards));
-                            Console.WriteLine("Součet dealerových karet je: " + Balicek.CountCards(DealerCards));
-
-                            if (Balicek.CountCards(DealerCards) > 21)
-                            {
-                                Console.WriteLine("Krupier má přes 21, vyhrál jsi! :) ");
-                                Hrac1.Win = true;
-                                Console.WriteLine(Hrac1.Score);
-                                
-                            }
-                            if (Balicek.CountCards(DealerCards) == 21)
-                            {
-                                Console.WriteLine("Krupier ma blackjack, prohrál jsi! :(");
-                                
-                            }
-                            else if (Balicek.CountCards(DealerCards) > Balicek.CountCards(PlayerCards) && Balicek.CountCards(DealerCards) < 21)
-                            {
-                                Console.WriteLine("Dealer má více, prohrál jsi! :(");
-                                
-                            }
-
-
-                            Console.WriteLine("Stiskni libovolnou klávesu");
-                            Console.ReadLine();
-                            break;
-                                   
-
-                        case "d":
-                            break;
-                        default:
-                            Console.WriteLine("Vyber z nabídky!");
-                            break;
-                    }
-                }
-                
-                
+                Karty.Add(Balicek.ShowCards()[num]);
+                Balicek.ShowCards().RemoveAt(num);
 
             }
-                
-
-    }
-
+            return Karty;
+            // while běží dokud hráč líže
+        }
+        */
         // Funkce na počítání hodnoty karet
         public static int CountCards(List<string> Karty)
         {
