@@ -16,24 +16,26 @@ namespace BlackJack
         {
             Game = true;
         }
-
+        
+        // Funkce obsahující menu hry 
         public void Loop()
         {
 
             
-
+            //vytvoření přezdívky
             Console.WriteLine("Zadejte přezdívku:");
             Console.Write("->");
             string username = Console.ReadLine();
 
             var Hrac1 = new Hrac(username);
-
+            
+            // While dokud hráč neopustí hru tlačítkem exit
             while (Game)
             {
                 Console.WriteLine("\n(P)LAY\n(Z)EBRICEK\n(J)AK HRÁT?\n(O) HRE\n(E)XIT");
                 Console.Write("->");
                 string menuVolba = Console.ReadLine().ToLower();
-
+                
                 switch (menuVolba)
                 {
                     case "p":
@@ -43,7 +45,7 @@ namespace BlackJack
                         Console.WriteLine("Zůstatek: " + Hrac1.Penize + "$\n");
                         Console.WriteLine("Zadej sazku:");
                         int sazka = 0;
-
+                        // Ošetření vstupu pouze na int
                         if (Int32.TryParse(Console.ReadLine(), out Hrac1.Score))
                             if (Hrac1.Score <= Hrac1.Penize && Hrac1.Score != 0)
                             {
@@ -88,6 +90,7 @@ namespace BlackJack
             }
         }
     }
+    // Funkce na vytvoření csv souboru a zapsání hodnot do souboru
     internal bool WriteToLeaderboard(string jmeno, int bank)
     {
         string FileName = "../../../leaderboard.csv";
@@ -104,7 +107,7 @@ namespace BlackJack
         return true;
     }
 
-
+    // Funkce na zobrazení dat z csv souboru
     internal void DisplayLeaderboard()
     {
         string[] leaderboard = System.IO.File.ReadAllLines(@"../../../leaderboard.csv");
