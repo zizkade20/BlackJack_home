@@ -89,7 +89,6 @@ namespace BlackJack
 
             }
         }
-    }
     // Funkce na vytvoření csv souboru a zapsání hodnot do souboru
     internal bool WriteToLeaderboard(string jmeno, int bank)
     {
@@ -116,5 +115,7 @@ namespace BlackJack
             Console.WriteLine(line);
         }
     }
+    }
+    
 }
 
