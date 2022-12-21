@@ -12,7 +12,7 @@ namespace BlackJack
         internal List<Karta> Deck;
 
 
-
+        // Funkce vytvoří balíček a naplní ho kartami
         internal void CreateDeck()
         {
             List<Karta> Deck = new List<Karta>();
@@ -49,7 +49,8 @@ namespace BlackJack
             List<string> PlayerCards = new List<string>();
             List<string> DealerCards = new List<string>();
             Random ran = new Random();
-
+            
+            // naplnění hráčovy ruky kartami
             for (int i = 0; i < 2; i++)
             {
                 int num = ran.Next(DeckOfCards.Count);
@@ -58,6 +59,7 @@ namespace BlackJack
                 DeckOfCards.RemoveAt(num);
 
             }
+            // naplnění krupierovy ruky kartami
             for (int i = 0; i < 2; i++)
             {
                 int num = ran.Next(DeckOfCards.Count);
@@ -70,6 +72,7 @@ namespace BlackJack
 
             Hrac Hrac1 = new Hrac();            
             bool hit = true;
+            // while běží dokud hráč líže
             while (hit)
             {
                         
@@ -83,8 +86,10 @@ namespace BlackJack
 
                     Console.WriteLine("\n(H)it / (S)tand / (D)ouble");
                     string volba = Console.ReadLine().ToLower();
+                    
                     switch (volba)
                     {
+                        // když hráč vybere hit, přičtě se mu jedna karta
                         case "h":
                             for (int i = 0; i < 1; i++)
                             {
@@ -108,7 +113,7 @@ namespace BlackJack
                             }
 
                             break;
-
+                        // když hráč vybere stand, krupiér začne lízat karty dokud nemá více než hráč a nepřekročil 21
                         case "s":
 
                             hit = false;
@@ -124,7 +129,8 @@ namespace BlackJack
                                 
                                 
 
-                            }
+                            } 
+                            // Podmínky pro určení vítěze
                             if (Balicek.CountCards(PlayerCards) == 21)
                             {
                                 hit = false;
@@ -205,7 +211,7 @@ namespace BlackJack
 
     }
 
-
+        // Funkce na počítání hodnoty karet
         public static int CountCards(List<string> Karty)
         {
             int summD = 0;
@@ -286,7 +292,7 @@ namespace BlackJack
             return summD;
         }
 
-
+        // Funkce na zobrazení hráčových karet
         internal static void KartyRuka(List<string> Karty)
         {
             Console.Write("Vase Karty: ");
@@ -297,7 +303,7 @@ namespace BlackJack
             Console.WriteLine();
         }
 
-
+        // Funkce na zobrazení krupierových karet
         internal static void KartyKrup(List<string> Karty)
         {
             Console.Write("Krupierovy karty: ");
