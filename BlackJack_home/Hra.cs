@@ -88,5 +88,30 @@ namespace BlackJack
             }
         }
     }
+    internal bool WriteToLeaderboard(string jmeno, int bank)
+    {
+        string FileName = "../../../leaderboard.csv";
+        string personDetail = jmeno + "," + pocet + Environment.NewLine;
+
+        if (!File.Exists(FileName)){
+            string clientHeader = Environment.NewLine;
+
+            File.WriteAllText(FileName, clientHeader);
+        }
+
+        File.AppendAllText(FileName, personDetail);
+
+        return true;
+    }
+
+
+    internal void DisplayLeaderboard()
+    {
+        string[] leaderboard = System.IO.File.ReadAllLines(@"../../../leaderboard.csv");
+        foreach(string line in leaderboard)
+        {
+            Console.WriteLine(line);
+        }
+    }
 }
 
