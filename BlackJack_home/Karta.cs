@@ -19,7 +19,7 @@ namespace BlackJack
             this.Barva = _barva;
         }
 
-
+        // funkce zajišťující vzhled zobrazených karet
         internal string VratNazevKarty()
         {
             return Hodnota + Barva;
