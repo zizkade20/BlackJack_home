@@ -45,7 +45,7 @@ namespace BlackJack
                 Console.WriteLine("\n(P)LAY\n(Z)EBRICEK\n(J)AK HRÁT?\n(O) HRE\n(E)XIT");
                 Console.Write("->");
                 string menuVolba = Console.ReadLine().ToLower();
-                
+
                 switch (menuVolba)
                 {
                     case "p":
@@ -65,7 +65,7 @@ namespace BlackJack
                                 default:
                                     break;
                             }
-                        } 
+                        }
 
                         int value;
                         Console.WriteLine("Zůstatek: " + Hrac1.Penize + "$\n");
@@ -97,7 +97,7 @@ namespace BlackJack
 
 
                                         break;
-                                    // Pokud nemá hned blackjack, volí mezi líznout, stát a double
+                                        // Pokud nemá hned blackjack, volí mezi líznout, stát a double
                                     } else
                                     {
                                         Console.WriteLine("\n(H)it / (S)tand / (D)ouble");
@@ -123,7 +123,7 @@ namespace BlackJack
 
                                                     Console.WriteLine("Máš přes 21, prohál jsi! :(");
                                                     Hrac1.Penize -= sazka;
-                                                // pokud má součet 21 ale více než 2 karty, vyhrál ale nemá blackjack
+                                                    // pokud má součet 21 ale více než 2 karty, vyhrál ale nemá blackjack
                                                 } else if (Balicek.CountCards(HracLiznuteKarty) == 21 && HracLiznuteKarty.Count > 2)
                                                 {
                                                     hit = false;
@@ -171,15 +171,15 @@ namespace BlackJack
 
 
                                                 }
-                                                    // pokud má dealer více než hráč, a hráč nemá v ruce více než 21, dealer vyhrál
+                                                // pokud má dealer více než hráč, a hráč nemá v ruce více než 21, dealer vyhrál
                                                 if (Balicek.CountCards(HracLiznuteKarty) > Balicek.CountCards(DealerLiznuteKarty) && Balicek.CountCards(HracLiznuteKarty) <= 21)
                                                 {
-                                                hit = false;
+                                                    hit = false;
 
 
-                                                Console.WriteLine("Máš více než krupier, vyhrál jsi! !)");
+                                                    Console.WriteLine("Máš více než krupier, vyhrál jsi! !)");
 
-                                                Hrac1.Penize += dabl;
+                                                    Hrac1.Penize += dabl;
                                                 }
                                                 // Pokud si hráč lízne a překročí 21, prohrál
                                                 else if (Balicek.CountCards(HracLiznuteKarty) > 21)
@@ -272,7 +272,7 @@ namespace BlackJack
                                                 {
                                                     Console.WriteLine("Dealer má více, prohrál jsi! :(");
                                                     Hrac1.Penize -= sazka;
-                                                    
+
                                                 } else if (Balicek.CountCards(DealerLiznuteKarty) == Balicek.CountCards(HracLiznuteKarty))
                                                 {
                                                     Console.WriteLine("Remíza");
@@ -284,7 +284,7 @@ namespace BlackJack
                                                 break;
 
 
-                                            
+
                                             default:
                                                 Console.WriteLine("Vyber z nabídky!");
                                                 break;
@@ -292,9 +292,13 @@ namespace BlackJack
                                     }
                                 }
                             }
+                            else if (sazka == 0)
+                            {
+                                Console.WriteLine("\nSázka není validní");
+                            }
                             else
                             {
-                                Console.WriteLine("\nNemáš dost peněz!");
+                                Console.WriteLine("\nNemáš dost peněz");
                             }
                                 break;
                     case "z":
