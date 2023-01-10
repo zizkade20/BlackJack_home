@@ -28,6 +28,8 @@ namespace BlackJack
             List<string> PlayerCards = new List<string>();
             List<string> DealerCards = new List<string>();
 
+            int pujcka = 0;
+
             Random ran = new Random();
             //vytvoření přezdívky
             Console.WriteLine("Zadejte přezdívku:");
@@ -47,6 +49,23 @@ namespace BlackJack
                 switch (menuVolba)
                 {
                     case "p":
+
+                        if (Hrac1.Penize <= 0)
+                        {
+                            Console.WriteLine("Zůstatek: " + Hrac1.Penize + "$\nPřišel jste o všechny peníze, chcete hrát znovu? (Y/N)");
+                            string anone = Console.ReadLine().ToLower();
+
+                            switch (anone)
+                            {
+                                case "y":
+                                    Hrac1.Penize = 200;
+                                    break;
+                                case "n":
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } 
 
                         int value;
                         Console.WriteLine("Zůstatek: " + Hrac1.Penize + "$\n");
