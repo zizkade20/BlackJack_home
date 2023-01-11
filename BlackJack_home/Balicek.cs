@@ -37,6 +37,7 @@ namespace BlackJack
             return Deck;
 
         }
+        //funkce na zobrazení hodnoty a barvy karty
         internal static List<string> ShowDeck() { 
 
             var random = new Random();
@@ -64,7 +65,6 @@ namespace BlackJack
 
             }
             return Ruka;
-            // while běží dokud hráč líže
         }
         // Funkce na počítání hodnoty karet
         public static int CountCards(List<string> Karty)

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlackJack_home
+namespace BlackJack
 {
-    internal class Krupier
+    internal class Krupier : Hrac
     {
     }
 }

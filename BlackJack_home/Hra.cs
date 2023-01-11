@@ -342,14 +342,13 @@ namespace BlackJack
                         Console.WriteLine("Sbohem... :(");
                         break;
                 }
-
             }
         }
         // Funkce na vytvoření csv souboru a zapsání hodnot do souboru
         internal static bool WriteToLeaderboard(string jmeno, int bank)
         {
-            string FileName = "../../../leaderboard.csv";
-            string personDetail = jmeno + "," + bank + Environment.NewLine;
+            string FileName = @"C:\mypath\leaderboard.csv";
+            string personDetail = jmeno + " " + bank + Environment.NewLine;
 
             if (!File.Exists(FileName)){
                 string clientHeader = Environment.NewLine;
@@ -362,18 +361,22 @@ namespace BlackJack
 
             }
 
+
+
             return true;
         }
 
         // Funkce na zobrazení dat z csv souboru
         internal static void DisplayLeaderboard()
         {
-            string[] leaderboard = System.IO.File.ReadAllLines(@"../../../leaderboard.csv");
+            string[] leaderboard = System.IO.File.ReadAllLines(@"C:\mypath\leaderboard.csv");
             foreach(string line in leaderboard)
             {
                 Console.WriteLine(line);
             }
         }
+
+
     }
     
 }
