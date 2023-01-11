@@ -65,28 +65,7 @@ namespace BlackJack
             }
             return Ruka;
             // while běží dokud hráč líže
-        }/*
-        internal static List<string> LizniDealer(List<string> Karty, int Pocet)
-        {
-
-            
-            Random ran = new Random();
-
-            // naplnění hráčovy ruky kartami
-            
-            // naplnění krupierovy ruky kartami
-            for (int i = 0; i < Pocet; i++)
-            {
-                int num = ran.Next(Balicek.ShowCards().Count);
-
-                Karty.Add(Balicek.ShowCards()[num]);
-                Balicek.ShowCards().RemoveAt(num);
-
-            }
-            return Karty;
-            // while běží dokud hráč líže
         }
-        */
         // Funkce na počítání hodnoty karet
         public static int CountCards(List<string> Karty)
         {

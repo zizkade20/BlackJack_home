@@ -10,8 +10,8 @@ namespace BlackJack
     {
         public string Jmeno;
         public int Penize = 200;
-        public bool Win;
-        public bool Blackjack;
+        //public bool Win;
+        //public bool Blackjack;
 
 
 
