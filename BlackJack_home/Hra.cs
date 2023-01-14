@@ -5,6 +5,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Linq;
+using System.Collections.Generic;
+using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace BlackJack
 {
@@ -12,6 +17,11 @@ namespace BlackJack
     {
         internal bool Game;
 
+        class Data
+        {
+            public string Name { get; set; }
+            public int Money { get; set; }
+        }
         internal Hra()
         {
             Game = true;
@@ -313,7 +323,7 @@ namespace BlackJack
                             }
                                 break;
                     case "z":
-                        Hra.DisplayLeaderboard();
+                        Hra.DeserializeJson();
                         break;
                     case "j":
                         Console.WriteLine("Cíl hry je se co nejblíže přiblížit součtem karet k 21. Pokud ho překročíš, automaticky prohráváš.");
@@ -328,7 +338,7 @@ namespace BlackJack
                         switch (volbba)
                         {
                             case "y":
-                                Hra.WriteToLeaderboard(username, Hrac1.Penize);
+                                Hra.AppendJson(username, Hrac1.Penize);
                                 Console.WriteLine("Uloženo");
                                 break;
                             case "n":
@@ -344,36 +354,55 @@ namespace BlackJack
                 }
             }
         }
-        // Funkce na vytvoření csv souboru a zapsání hodnot do souboru
-        internal static bool WriteToLeaderboard(string jmeno, int bank)
+        internal static bool AppendJson(string jmeno, int bank)
         {
-            string FileName = @"C:\mypath\leaderboard.csv";
-            string personDetail = jmeno + " " + bank + Environment.NewLine;
+            
+            var path = @"../../../leaderboard.json";
 
-            if (!File.Exists(FileName)){
-                string clientHeader = Environment.NewLine;
+            var data = File.ReadAllText(path);
 
-                File.WriteAllText(FileName, clientHeader);
-            }
-            if (jmeno.Length > 0)
-            {
-                File.AppendAllText(FileName, personDetail);
+            var newObject = JsonConvert.DeserializeObject<List<Data>>(data) ?? new List<Data>();
 
-            }
+            newObject.Add(new Data { Name = jmeno, Money = bank });
 
+            data = JsonConvert.SerializeObject(newObject);
+            System.IO.File.WriteAllText(path, data);
 
 
             return true;
         }
 
-        // Funkce na zobrazení dat z csv souboru
-        internal static void DisplayLeaderboard()
+
+
+
+
+        internal static void DeserializeJson()
         {
-            string[] leaderboard = System.IO.File.ReadAllLines(@"C:\mypath\leaderboard.csv");
-            foreach(string line in leaderboard)
+            var path = @"../../../leaderboard.json";
+
+
+           
+
+
+
+            string json = File.ReadAllText(path);
+
+            var dataList = JsonConvert.DeserializeObject<List<Data>>(string.Join("", json));
+
+            Console.WriteLine("Žebříček největších borců:");
+            
+            foreach(var data in dataList)
             {
-                Console.WriteLine(line);
+
+                Console.WriteLine("Name: " + data.Name + " Money: " + data.Money);
             }
+
+
+
+           
+
+
+            
         }
 
 
