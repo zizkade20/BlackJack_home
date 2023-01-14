@@ -361,11 +361,13 @@ namespace BlackJack
 
             var data = File.ReadAllText(path);
 
-            var newObject = JsonConvert.DeserializeObject<List<Data>>(data) ?? new List<Data>();
 
-            newObject.Add(new Data { Name = jmeno, Money = bank });
 
-            data = JsonConvert.SerializeObject(newObject);
+            var nData = JsonConvert.DeserializeObject<List<Data>>(data) ?? new List<Data>();
+
+            nData.Add(new Data { Name = jmeno, Money = bank });
+
+            data = JsonConvert.SerializeObject(nData);
             File.WriteAllText(path, data);
             
 
@@ -379,14 +381,17 @@ namespace BlackJack
            
             string json = File.ReadAllText(path);
 
-            var sorted = json.OrderByDescending(x => x);
+
 
             var dataList = JsonConvert.DeserializeObject<List<Data>>(json);
+
+            var sorted = dataList.OrderByDescending(x => x.Money);
+
 
             Console.WriteLine("Žebříček největších borců:\n");
             if (dataList != null)
             {
-                foreach(var data in dataList)
+                foreach(var data in sorted)
                 {
 
                     Console.WriteLine(data.Name + "  " + data.Money);
