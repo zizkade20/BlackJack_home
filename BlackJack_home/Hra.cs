@@ -366,47 +366,34 @@ namespace BlackJack
             newObject.Add(new Data { Name = jmeno, Money = bank });
 
             data = JsonConvert.SerializeObject(newObject);
-            System.IO.File.WriteAllText(path, data);
-
+            File.WriteAllText(path, data);
+            
 
             return true;
         }
-
-
-
-
 
         internal static void DeserializeJson()
         {
             var path = @"../../../leaderboard.json";
 
-
            
-
-
-
             string json = File.ReadAllText(path);
 
-            var dataList = JsonConvert.DeserializeObject<List<Data>>(string.Join("", json));
+            var sorted = json.OrderByDescending(x => x);
 
-            Console.WriteLine("Žebříček největších borců:");
-            
-            foreach(var data in dataList)
+            var dataList = JsonConvert.DeserializeObject<List<Data>>(json);
+
+            Console.WriteLine("Žebříček největších borců:\n");
+            if (dataList != null)
             {
+                foreach(var data in dataList)
+                {
 
-                Console.WriteLine("Name: " + data.Name + " Money: " + data.Money);
+                    Console.WriteLine(data.Name + "  " + data.Money);
+                }
             }
 
-
-
-           
-
-
-            
         }
-
-
     }
-    
 }
 

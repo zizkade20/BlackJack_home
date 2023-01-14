@@ -1,1 +1,10 @@
-[{"Name":"a","Money":90},{"Name":"e","Money":200},{"Name":"jiri","Money":160}]
+[
+  {
+    "Name": "johnny",
+    "Money": 200
+  },
+  {
+    "Name": "jiri",
+    "Money": 600
+  }
+]
