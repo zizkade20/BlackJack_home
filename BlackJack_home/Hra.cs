@@ -43,6 +43,7 @@ namespace BlackJack
             Random ran = new Random();
             //vytvoření přezdívky
 
+            CreateJson();
 
             Console.WriteLine("Zadejte přezdívku:");
             Console.Write("->");
@@ -354,9 +355,10 @@ namespace BlackJack
                 }
             }
         }
+
         internal static void CreateJson()
         {
-            var path = @"../../../diar.json";
+            var path = @"../../../leaderboard.json";
 
             string stri = "";
 
