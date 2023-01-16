@@ -354,6 +354,14 @@ namespace BlackJack
                 }
             }
         }
+        internal static void CreateJson()
+        {
+            var path = @"../../../diar.json";
+
+            string stri = "";
+
+            File.AppendAllText(path, stri);
+        }
         internal static bool AppendJson(string jmeno, int bank)
         {
             
@@ -362,7 +370,7 @@ namespace BlackJack
             var data = File.ReadAllText(path);
 
 
-
+            // pokud je List vlevo null, vytvoří se nový list
             var nData = JsonConvert.DeserializeObject<List<Data>>(data) ?? new List<Data>();
 
             nData.Add(new Data { Name = jmeno, Money = bank });
